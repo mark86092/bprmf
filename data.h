@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
+#include "pair.h"
 
 using namespace std;
 
@@ -32,6 +33,7 @@ public:
 	inline size_t Nuser() const {return _Nuser;}
 	inline size_t Nitem() const {return _Nitem;}
 	void Read_File(const char * filename);
+	vector<Pair> draw_sample(const int ji_ratio) const;
 };
 
 #endif

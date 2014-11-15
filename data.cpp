@@ -32,3 +32,22 @@ void Train::Read_File(const char * filename) {
     }
     file.close();
 }
+
+/* 對每個 u 當中的每個 i_set(u) 元素都 sample ji_ratio 個 j*/
+vector<Pair> Train::draw_sample(const int ji_ratio) const {
+    vector<Pair> samples;
+    for (size_t u = 0; u < Nuser(); u++) {
+        for (auto it = i_set[u].begin(); it != i_set[u].end(); it++) {
+            size_t i = *it;
+            for (size_t Npair = 0; Npair < (size_t)ji_ratio; ) {
+                size_t j = rand() % Nitem();
+                if (i_set[u].find(j) == i_set[u].end()) {
+                    Npair++;
+                    samples.push_back(Pair(u, i, j));
+                }
+            }
+        }
+    }
+    random_shuffle(samples.begin(), samples.end());
+    return samples;
+}
