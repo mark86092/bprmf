@@ -3,10 +3,15 @@ TARGET = bprmf
 
 all: $(TARGET)
 
-bprmf: bprmf.cpp usage.o data2.o model.o statics.o argument.o
+bprmf: bprmf.o data.o model.o
+	g++ $(CXXFLAG) -o $@ $^
+
+test_data: test_data.o data.o 
 	g++ $(CXXFLAG) -o $@ $^
 
 %.o: %.cpp %.h
+	g++ $(CXXFLAG) -o $@ -c $<
+%.o: %.cpp
 	g++ $(CXXFLAG) -o $@ -c $<
 
 .PHONY: clean
