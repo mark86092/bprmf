@@ -3,7 +3,7 @@ TARGET = bprmf
 
 all: $(TARGET)
 
-bprmf: bprmf.o data.o model.o
+bprmf: bprmf.o data.o model.o predict.o
 	g++ $(CXXFLAG) -o $@ $^
 
 test_data: test_data.o data.o 

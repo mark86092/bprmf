@@ -5,12 +5,9 @@
 #include <vector>
 #include "data.h"
 #include "model.h"
+#include "predict.h"
 
 using namespace std;
-
-bool sort_by_y(const Pair_i_yui &i, const Pair_i_yui &j) {
-	return (i.y > j.y);
-}
 
 int main(int argc, const char* argv[])
 {
@@ -34,24 +31,10 @@ int main(int argc, const char* argv[])
 	//vector<Pair> sample = train.draw_sample(1);
 
 	/* caculate score of u */
-	fstream f;
-	f.open("../test_nodes.txt", ios::in);
+	fstream f("../test_nodes.txt", ios::in);
+	//f.open("../test_nodes.txt", ios::in);
 	size_t u;
 	f >> u;
-
-	vector<Pair_i_yui> predict;
-	for (size_t i = 0; i < train.Nitem(); i++) {
-		if (i == u)
-			continue;
-		if (train.i_set[u].find(i) != train.i_set[u].end())
-			continue;
-		double y = model.P.row(u).dot(model.Q.row(i));
-		predict.push_back(Pair_i_yui(i, y));
-	}
-	
-	sort(predict.begin(), predict.end(), sort_by_y);
-    for (size_t i = 0; i < 30; i++) {
-		cout << predict[i].i << " " << predict[i].y << endl;
-	}
-	/** core part **/
+    cout << u << endl;
+	vector<Pair_i_y> predict = predict_top_N(train, model, u, 30);
 }

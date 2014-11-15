@@ -18,4 +18,12 @@ public:
 	}
 };
 
+class Pair_i_y {
+public:
+	size_t i;
+	double y;
+	inline Pair_i_y(size_t _i, double _y) {i = _i; y = _y;}
+	Pair_i_y() {}
+};
+
 #endif

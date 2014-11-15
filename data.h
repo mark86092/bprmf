@@ -8,17 +8,6 @@
 
 using namespace std;
 
-/* 用來存 (i, yui) 的tuple */
-class Pair_i_yui {
-public:
-	size_t i;
-	double y;
-	Pair_i_yui(size_t _i, double _y) {
-		i = _i; y = _y;
-	}
-	Pair_i_yui() {}
-};
-
 class Train {
 protected:
 	size_t _Nuser; 
